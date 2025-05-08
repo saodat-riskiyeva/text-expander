@@ -41,7 +41,7 @@ function TextExpander({
   className = "",
   collapsedNumWords = 10,
   expandButtonText = "Show more",
-  buttonColor = "#ff6622",
+  buttonColor = "purple",
 }) {
   const [expandedText, setExpandedText] = useState(expanded);
 
@@ -53,12 +53,15 @@ function TextExpander({
     setExpandedText(!expandedText);
   }
 
+  const abridgeButtonText =
+    expandButtonText === "Show text" ? "Collapse text" : "Show less";
+
   return (
     <div className={className}>
       <p>
         {displayedText}
         <Button buttonColor={buttonColor} onExpand={handleExpandedText}>
-          {expandedText ? "Show less" : expandButtonText}
+          {expandedText ? abridgeButtonText : expandButtonText}
         </Button>
       </p>
     </div>
@@ -67,7 +70,7 @@ function TextExpander({
 
 function Button({ buttonColor, onExpand, children }) {
   const buttonStyle = {
-    color: { buttonColor },
+    color: `${buttonColor}`,
     background: "none",
     padding: "4px",
     border: "none",
