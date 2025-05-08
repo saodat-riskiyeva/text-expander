@@ -47,7 +47,7 @@ function TextExpander({
 
   const displayedText = expandedText
     ? children
-    : children.substring(0, collapsedNumWords);
+    : children.split(" ", collapsedNumWords).join(" ") + "...";
 
   function handleExpandedText() {
     setExpandedText(!expandedText);
@@ -58,7 +58,7 @@ function TextExpander({
       <p>
         {displayedText}
         <Button buttonColor={buttonColor} onExpand={handleExpandedText}>
-          {expandButtonText}
+          {expandedText ? "Show less" : expandButtonText}
         </Button>
       </p>
     </div>
