@@ -36,34 +36,32 @@ export default function App() {
 }
 
 function TextExpander({
-  children,
-  expanded = false,
-  className = "",
   collapsedNumWords = 10,
   expandButtonText = "Show more",
-  buttonColor = "purple",
+  collapseButtonText = "Show less",
+  buttonColor = "#1f09cd",
+  expanded = false,
+  className,
+  children,
 }) {
-  const [expandedText, setExpandedText] = useState(expanded);
+  const [isExpandedText, setIsExpandedText] = useState(expanded);
 
-  const displayedText = expandedText
+  const displayedText = isExpandedText
     ? children
     : children.split(" ", collapsedNumWords).join(" ") + "...";
 
   function handleExpandedText() {
-    setExpandedText(!expandedText);
+    setIsExpandedText(!isExpandedText);
   }
-
-  const abridgeButtonText =
-    expandButtonText === "Show text" ? "Collapse text" : "Show less";
 
   return (
     <div className={className}>
-      <p>
+      <span>
         {displayedText}
         <Button buttonColor={buttonColor} onExpand={handleExpandedText}>
-          {expandedText ? abridgeButtonText : expandButtonText}
+          {isExpandedText ? collapseButtonText : expandButtonText}
         </Button>
-      </p>
+      </span>
     </div>
   );
 }
@@ -75,6 +73,8 @@ function Button({ buttonColor, onExpand, children }) {
     padding: "4px",
     border: "none",
     cursor: "pointer",
+    font: "inherit",
+    marginLeft: "6px",
   };
 
   return (
